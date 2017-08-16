@@ -1,0 +1,73 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+bool checkAnagram(string a1,string a2){							   // This function checks if two strings are anagrams
+	int x=a1.length();
+	int c1[26] = {0};											   //Creating two arrays of 26 length
+	int c2[26] = {0};
+	for(int i=0;i<x;i++){	                                       //This loop adds a number at c1[25] if char 'z' is present in string a1
+		if(((int)a1[i]) > 97 && ((int)a1[i]) < 122){
+			c1[(int)a1[i] - 97]++;		
+		}			
+		if(((int)a2[i]) > 97 && ((int)a2[i]) < 122){
+			c2[(int)a2[i] - 97]++;
+		}
+		if(((int)a1[i]) > 65 && ((int)a1[i]) < 90) {
+			c1[(int)a1[i] - 65]++;
+		}
+		if(((int)a2[i]) > 65 && ((int)a2[i]) < 90) {
+			c2[(int)a2[i] - 65]++;
+		}
+	}
+	int count =0;
+	for(int i=0;i<26;i++){											
+		if(c1[i] == c2[i]){
+			count++;
+		}
+	}
+	if(count == 26){
+		return true;
+	}
+	else {return false;}
+}
+		
+
+int main(){
+	string s,t;
+	cin >> s >> t;												  // Input of 2 strings to be given from user end
+	int n1,n2;													 // n,m are length of strings s,t respectively
+	n1 = s.length();
+	n2 = t.length();
+	if(n1<n2){
+		cout << "No" << endl;
+		break;
+	}
+	int k = n2;
+	
+	for(int i=0;i<n2;i++){										// This loop is to check if all letters of string t are in string s.
+		for(int j=0;j<n1;j++){
+			if(t[i] == s[j]){
+				k--;
+				break;
+			}
+		}
+	}
+	
+	if(k! = 0){													//If any one letter in t is not present in s...prints No
+		cout << "No" << endl ;
+		return 0;
+	}
+	
+	for(int i=0;i<(n1-n2);i++){								   //This loop checks if any n2 characters of string s is an anagram of string t.if true it prints yes
+		if(checkAnagram(s.substr(i,n2),t){
+			cout << "Yes" << endl;
+		}
+	}
+	
+	cout << "No" << endl;
+	return 0;
+}
+			
+			
